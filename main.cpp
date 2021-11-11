@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -7,16 +6,20 @@
 #define DEBUGP(foo) PRINT("At coordinates (" + std::to_string(row) + ", " + std::to_string(col) + ") Value is: " + std::to_string(foo))
 
 namespace game {
-	char screen[HEIGHT][WIDTH+1]{};
-	bool running;
+	struct state_t {
+		char screen[HEIGHT][WIDTH+1]{};
+		bool running;
+		bool needInput;
+	} active;
+
 	void drawFrameBuffer() {
-		char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+//		char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 		for (int row = 0; row < HEIGHT; row++) {
 			for (int col = 0; col < WIDTH; col++) {
 				if (col == WIDTH-1) {
-					screen[row][col] = '\0';
+					active.screen[row][col] = '\0';
 				} else {
-					screen[row][col] = '='; 
+					active.screen[row][col] = '='; 
 				}
 			}
 		}
@@ -31,19 +34,18 @@ namespace game {
 	}
 
 	void updateGameState() {
-		running = false;
+		active.running = false;
 		return;
 	}
 
 	void refresh() {
 		for(int y = 0; y < HEIGHT; y++) {
-			PRINT(screen[y]);
+			PRINT(active.screen[y]);
 		}
 	}
 
 	void mainLoop() {
-		running = true;
-		while (running) {
+		while (active.running) {
 			drawFrameBuffer();
 //			getInput();
 			updateGameState();
@@ -51,8 +53,21 @@ namespace game {
 		}
 	}
 
+	void init() {
+		active.running = true;
+		active.needInput = false;
+		return;
+	}
+
+	void cleanup() {
+		//doesn't need to do anything yet
+		return;
+	}
+
 	void run() {
+		init();
 		mainLoop();
+		cleanup();
 	}
 }
 	int main() {
