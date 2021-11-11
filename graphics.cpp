@@ -11,10 +11,11 @@ namespace game {
 				if (col == WIDTH-1) {
 					active.screen[row][col] = '\0';
 				} else {
-					active.screen[row][col] = '='; 
+					active.screen[row][col] = active.thisInput; 
 				}
 			}
 		}
+		return void();
 	}
 
 
@@ -23,5 +24,6 @@ namespace game {
 		for(int y = 0; y < HEIGHT; y++) {
 			PRINT(active.screen[y]);
 		}
+		return void();
 	}
 }

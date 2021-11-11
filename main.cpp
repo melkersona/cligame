@@ -7,46 +7,54 @@ namespace game {
 
 	state_t active;
 
-	void getInput() {
-		char n{};
-		std::cout << "INPUT: ";
-		n = std::getchar();
-		PRINT(n);
-		return;
+	void getInput(void) {
+		if(active.needInput) {
+			std::cout << "INPUT: ";
+			active.thisInput = std::cin.get();
+		}
+		return void();
 	}
 
-	void updateGameState() {
-		active.running = false;
-		return;
+	void updateGameState(void) {
+		if(active.cycles==1) {
+			active.running = false;
+		} else {
+			active.needInput = true;
+		}
+		active.cycles++;
+		return void();
 	}
 
-	void mainLoop() {
+	void mainLoop(void) {
 		while (active.running) {
+			getInput();
 			drawFrameBuffer(active);
-//			getInput();
 			updateGameState();
 			refresh(active);
 		}
+		return void();
 	}
 
-	void init() {
+	void init(void) {
 		active.running = true;
 		active.needInput = false;
-		return;
+		active.cycles = 0;
+		active.thisInput = '=';
+		return void();
 	}
 
-	void cleanup() {
+	void cleanup(void) {
 		//doesn't need to do anything yet
-		return;
+		return void();
 	}
 
-	void run() {
+	void run(void) {
 		init();
 		mainLoop();
 		cleanup();
 	}
 }
-	int main() {
+	int main(void) {
 		try {
 			game::run();
 		} catch (const std::exception& e) {
