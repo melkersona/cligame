@@ -1,25 +1,22 @@
 #include <iostream>
 #include <cstring>
 
-#define WIDTH 4
-#define HEIGHT 2 
+#define WIDTH 80
+#define HEIGHT 24
 #define PRINT(bar) std::cout << bar << std::endl
-#define DEBUGP(foo) PRINT("At coordinates (" + std::to_string(x) + ", " + std::to_string(y) + ") Value is: " + std::to_string(foo))
+#define DEBUGP(foo) PRINT("At coordinates (" + std::to_string(row) + ", " + std::to_string(col) + ") Value is: " + std::to_string(foo))
 
 namespace game {
-	char screen[WIDTH][HEIGHT]{};
+	char screen[HEIGHT][WIDTH+1]{};
 	bool running;
 	void drawFrameBuffer() {
-//		char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-		for (int y = 0; y < HEIGHT; y++) {
-			for (int x = 0; x < WIDTH+1; x++) {
-				if (x == WIDTH) {
-					screen[y][x] = '\0';
-//					DEBUGP(0);
+		char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+		for (int row = 0; row < HEIGHT; row++) {
+			for (int col = 0; col < WIDTH; col++) {
+				if (col == WIDTH-1) {
+					screen[row][col] = '\0';
 				} else {
-//					screen[y][x] = digits[x%16];
-					screen[y][x] = '=';
-//					DEBUGP(1);
+					screen[row][col] = '='; 
 				}
 			}
 		}
@@ -40,7 +37,6 @@ namespace game {
 
 	void refresh() {
 		for(int y = 0; y < HEIGHT; y++) {
-//			PRINT(y);
 			PRINT(screen[y]);
 		}
 	}

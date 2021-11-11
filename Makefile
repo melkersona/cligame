@@ -2,7 +2,7 @@ cligame: main.cpp
 	g++ -o cligame main.cpp
 
 debug: main.cpp
-	g++ -Ddeug -o cligameDEBUG main.cpp -g
+	g++ -Ddeug -o cligame main.cpp -g
 
 test: cligame
 	./cligame
@@ -10,4 +10,3 @@ test: cligame
 .PHONY: clean
 clean:
 	rm ./cligame
-	rm ./cligameDEBUG
