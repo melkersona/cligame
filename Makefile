@@ -1,12 +1,16 @@
-cligame: main.cpp
-	g++ -o cligame main.cpp
+objects = main.o graphics.o 
+cligame: $(objects)
+	g++ -o cligame $(objects)
 
-debug: main.cpp
-	g++ -Ddeug -o cligame main.cpp -g
+debug: $(objects)
+	g++ -Ddeug -o cligame main.cpp $(objects) -g
+
+main.o: graphics.o
+graphics.o: 
 
 test: cligame
 	./cligame
 
 .PHONY: clean
 clean:
-	rm ./cligame
+	rm ./cligame *.o
