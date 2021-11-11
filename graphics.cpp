@@ -11,7 +11,7 @@ namespace game {
 				if (col == WIDTH-1) {
 					active.screen[row][col] = '\0';
 				} else {
-					active.screen[row][col] = active.thisInput; 
+					active.screen[row][col] = active.thisInput[0]; 
 				}
 			}
 		}

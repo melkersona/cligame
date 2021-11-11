@@ -10,7 +10,7 @@ namespace game {
 	void getInput(void) {
 		if(active.needInput) {
 			std::cout << "INPUT: ";
-			active.thisInput = std::cin.get();
+			std::cin.get(active.thisInput, 2);
 		}
 		return void();
 	}
@@ -39,7 +39,7 @@ namespace game {
 		active.running = true;
 		active.needInput = false;
 		active.cycles = 0;
-		active.thisInput = '=';
+		active.thisInput[0] = '=';
 		return void();
 	}
 
