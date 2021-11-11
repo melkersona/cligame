@@ -11,14 +11,16 @@ namespace game {
 		if(active.needInput) {
 			std::cout << "INPUT: ";
 			std::cin.get(active.thisInput, 2);
+			std::cin.ignore();
 		}
 		return void();
 	}
 
 	void updateGameState(void) {
-		if(active.cycles==1) {
+		if(active.thisInput[0] == '\\') {
 			active.running = false;
-		} else {
+		} 
+		if (active.cycles == 0) {
 			active.needInput = true;
 		}
 		active.cycles++;
