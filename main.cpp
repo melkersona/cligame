@@ -1,23 +1,16 @@
+#include <ncurses.h>
 #include <iostream>
 #include "defs.h"
 #include "graphics.h"
+#include "input.h"
 #include "state.h"
 
 namespace game {
 
 	state_t active;
 
-	void getInput(void) {
-		if(active.needInput) {
-			std::cout << "INPUT: ";
-			std::cin.get(active.thisInput, 2);
-			std::cin.ignore();
-		}
-		return void();
-	}
-
 	void updateGameState(void) {
-		if(active.thisInput[0] == '\\') {
+		if(active.thisInput == '\\') {
 			active.running = false;
 		} 
 		if (active.cycles == 0) {
@@ -29,10 +22,11 @@ namespace game {
 
 	void mainLoop(void) {
 		while (active.running) {
-			getInput();
+			getInput(active);
 			drawFrameBuffer(active);
 			updateGameState();
-			refresh(active);
+			draw(active);
+			refresh();
 		}
 		return void();
 	}
@@ -41,12 +35,17 @@ namespace game {
 		active.running = true;
 		active.needInput = false;
 		active.cycles = 0;
-		active.thisInput[0] = '=';
+		active.thisInput = '=';
+		initscr();
+		raw();
+		keypad(stdscr, TRUE);
+		noecho();
+
 		return void();
 	}
 
 	void cleanup(void) {
-		//doesn't need to do anything yet
+		endwin();
 		return void();
 	}
 

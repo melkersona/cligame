@@ -1,3 +1,4 @@
+#include <ncurses.h>
 #include <iostream>
 #include "defs.h"
 #include "state.h"
@@ -11,7 +12,7 @@ namespace game {
 				if (col == WIDTH-1) {
 					active.screen[row][col] = '\0';
 				} else {
-					active.screen[row][col] = active.thisInput[0]; 
+					active.screen[row][col] = active.thisInput; 
 				}
 			}
 		}
@@ -20,9 +21,9 @@ namespace game {
 
 
 
-	void refresh(state_t &active) {
+	void draw(state_t &active) {
 		for(int y = 0; y < HEIGHT; y++) {
-			PRINT(active.screen[y]);
+			printw(active.screen[y]);
 		}
 		return void();
 	}

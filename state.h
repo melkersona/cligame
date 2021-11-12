@@ -8,7 +8,7 @@ namespace game {
 		char screen[HEIGHT][WIDTH+1];
 		bool running;
 		bool needInput;
-		char thisInput[2];
+		int thisInput;
 	}; 
 }
 #endif
