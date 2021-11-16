@@ -5,8 +5,9 @@
 
 namespace game {
 	void getInput(state_t &active) {
-		if(active.needInput) {
-			active.thisInput = getch();
+		char c = getch();
+		if ( c == 3 ) {
+			active.running = false;
 		}
 		return void();
 	}

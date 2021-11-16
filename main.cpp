@@ -14,7 +14,8 @@ namespace game {
 			active.running = false;
 		} 
 		if (active.cycles == 0) {
-			active.needInput = true;
+//			active.needInput = true;
+//			raw();
 		}
 		active.cycles++;
 		return void();
@@ -22,7 +23,9 @@ namespace game {
 
 	void mainLoop(void) {
 		while (active.running) {
-			getInput(active);
+			if (active.needInput) {
+				getInput(active);
+			}
 			drawFrameBuffer(active);
 			updateGameState();
 			draw(active);
@@ -37,7 +40,7 @@ namespace game {
 		active.cycles = 0;
 		active.thisInput = '=';
 		initscr();
-		raw();
+		cbreak();
 		keypad(stdscr, TRUE);
 		noecho();
 
