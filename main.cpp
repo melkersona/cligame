@@ -11,12 +11,17 @@ namespace game {
 
 	void updateGameState(void) {
 		if(active.thisInput == '\\') {
-			active.running = false;
+			active.running 	 = false;
 		} 
-		if (active.cycles == 0) {
-//			active.needInput = true;
-//			raw();
+		switch ( active.cycles ) {
+		case 0:
+			active.needInput = true;
+			break;
+		case 16:
+			active.running = false;
+			break;
 		}
+		
 		active.cycles++;
 		return void();
 	}
@@ -35,14 +40,15 @@ namespace game {
 	}
 
 	void init(void) {
-		active.running = true;
+		active.running 	 = true;
 		active.needInput = false;
-		active.cycles = 0;
-		active.thisInput = '=';
+		active.cycles 	 = 0;
+		active.thisInput = '0';
 		initscr();
 		cbreak();
 		keypad(stdscr, TRUE);
 		noecho();
+		nodelay(stdscr, FALSE);
 
 		return void();
 	}

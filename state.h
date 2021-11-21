@@ -5,7 +5,7 @@
 namespace game {
 	struct state_t {
 		int cycles;
-		char screen[HEIGHT][WIDTH+1];
+		char screen[][];
 		bool running;
 		bool needInput;
 		int thisInput;
