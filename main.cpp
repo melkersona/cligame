@@ -21,8 +21,13 @@ namespace game {
 			active.running = false;
 			break;
 		}
+		if (active.thisInput == 'a') {
+			active.leaves++;
+		}
+		getmaxyx(stdscr, active.termHeight, active.termWidth);
 		
 		active.cycles++;
+		active.calories += active.leaves;
 		return void();
 	}
 
@@ -44,6 +49,8 @@ namespace game {
 		active.needInput = false;
 		active.cycles 	 = 0;
 		active.thisInput = '0';
+		active.calories  = 0;
+		active.leaves    = 1;
 		initscr();
 		cbreak();
 		keypad(stdscr, TRUE);
