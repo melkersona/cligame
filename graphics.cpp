@@ -5,8 +5,8 @@
 #include "state.h"
 
 namespace game {
-	void drawFrameBuffer(state_t &active) {
 //		char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'}; //This is for debug use, helps to determine where things are being printed.
+	void drawFrameBuffer(state_t &active) {
 		refresh();
 		return void();
 	}

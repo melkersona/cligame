@@ -11,7 +11,7 @@ namespace game {
 
 	void updateGameState(void) {
 		if(active.thisInput == '\\') {
-			active.running 	 = false;
+			active.running 	 = false; // This makes the main loop terminate and terminate the program correctly.
 		} 
 		switch ( active.cycles ) {
 		case 0:
@@ -34,11 +34,11 @@ namespace game {
 	void mainLoop(void) {
 		while (active.running) {
 			if (active.needInput) {
-				getInput(active);
+				game::getInput(active);
 			}
-			drawFrameBuffer(active);
-			updateGameState();
-			draw(active);
+//			game::drawFrameBuffer(active);
+			game::updateGameState();
+			game::draw(active);
 			refresh();
 		}
 		return void();
@@ -76,6 +76,7 @@ namespace game {
 			game::run();
 		} catch (const std::exception& e) {
 			PRINT("Oepsie Woeupsie! Bad things happened uwu.");
+			return 1;
 		}
 
 		return 0;

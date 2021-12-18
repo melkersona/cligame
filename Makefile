@@ -1,19 +1,21 @@
 objects = main.o graphics.o input.o
+headers = defs.h state.h
 cflags = -lncurses
-cligame: $(objects)
-	g++ -o cligame $(objects) $(cflags)
+OBJ = ./obj
+BIN = ./bin
+EXE = cligame
+
+cligame: $(objects) $(headers)
+	g++ -o $(EXE) $(objects) $(cflags)
 
 debug: $(objects)
 	g++ -Ddeug -o cligame main.cpp $(objects) $(cflags) -g
 
-main.o: defs.h graphics.o input.o
-graphics.o: defs.h
-input.o: defs.h
+$(objects): $(headers)
 
 test: cligame
-	./cligame
+	./$(EXE)
 
 .PHONY: clean
-.PHONY: defs.h
 clean:
-	-rm cligame *.o
+	-rm $(objects) $(EXE)
