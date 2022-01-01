@@ -16,6 +16,9 @@ $(objects): $(headers)
 test: cligame
 	./$(EXE)
 
-.PHONY: clean
+.PHONY: clean tags
 clean:
 	-rm $(objects) $(EXE)
+
+tags:
+	ctags -R --exclude=.git
