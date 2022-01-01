@@ -9,7 +9,7 @@ cligame: $(objects) $(headers)
 	g++ -o $(EXE) $(objects) $(cflags)
 
 debug: $(objects)
-	g++ -Ddeug -o cligame main.cpp $(objects) $(cflags) -g
+	g++ -Ddebug -o cligame main.cpp $(objects) $(cflags) -g
 
 $(objects): $(headers)
 
