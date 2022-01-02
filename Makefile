@@ -1,4 +1,4 @@
-objects = main.o graphics.o input.o
+objects = main.o graphics.o input.o script.o
 headers = defs.h state.h
 cflags = -lncurses
 OBJ = ./obj

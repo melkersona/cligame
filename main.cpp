@@ -1,10 +1,12 @@
 #include <ncurses.h>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "defs.h"
 #include "graphics.h"
 #include "input.h"
 #include "state.h"
+#include "script.h"
 
 namespace game {
 
@@ -23,14 +25,8 @@ namespace game {
 				break;
 		}
 
-		if (active.thisInput == 'a') {
-			active.leaves++;
-		}
-
 		getmaxyx(stdscr, active.termHeight, active.termWidth);
 		
-		active.cycles++;
-		active.calories += active.leaves;
 		return void();
 	}
 
@@ -46,14 +42,13 @@ namespace game {
 		}
 		return void();
 	}
-
+	
 	void init(void) {
 		active.running 	 = true;
 		active.needInput = false;
 		active.cycles 	 = 0;
 		active.thisInput = '0';
-		active.calories  = 0;
-		active.leaves    = 1;
+		script_t bar = game::readScript("script");
 		initscr();
 		cbreak();
 		keypad(stdscr, TRUE);
@@ -69,9 +64,9 @@ namespace game {
 	}
 
 	int run(void) {
-		init();
-		mainLoop();
-		cleanup();
+//		init();
+//		mainLoop();
+//		cleanup();
 		return 0;
 	}
 }

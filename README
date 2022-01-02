@@ -8,3 +8,24 @@ If abstracted well enough, you should be able to create a world much like the Ka
 I am imagining meta progression on the player's side, exposing a lore-built for their character to explore various worlds and narratives, and tie it all together into one progression where exploring new user & dev submitted content feels rewarding long term.
 
 Just a *little* ambitious. 
+
+Program when built will dynamically load files to describe content of a story, which the game will then tell.
+Proposed format for game files:
+A manifest file to describe which files the engine needs to care of (Is this necessary? Can we just assume all files are good to read?)
+	How else to define the entry point for game files? Predefined main script file?
+A collection of scripts, the only hard required type will be text that will be printed, making the "game" just a linear novel to read by players.
+Other types: 
+	Characters
+		Name
+		Interactions with player (Fight? talk?)
+		Stats?
+	Locations
+		Characters and objects present
+		Music to play when player is in location
+	Items
+		Stats?
+		Use effects?
+		Key-usage?
+	(World) Objects
+		Interactions with player, does stepping into it do something? Does interacting with it do something?
+		World properties (Can walk through or blocking?)
