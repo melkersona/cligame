@@ -1,17 +1,24 @@
-objects = main.o graphics.o input.o script.o
-headers = defs.h state.h
-cflags = -lncurses
-OBJ = ./obj
-BIN = ./bin
+sources = $(wildcard *.cpp)
+headers = $(wildcard *.h)
+objects = $(addprefix $(OBJ), $(sources:.cpp=.o))
+CXXFLAGS = -lncurses
+CXX = g++
+OBJ = obj/
+BIN = bin/
 EXE = cligame
+out = -o $(EXE) $(objects) $(CXXFLAGS)
 
 cligame: $(objects) $(headers)
-	g++ -o $(EXE) $(objects) $(cflags)
+	$(CXX) $(out)
 
 debug: $(objects)
-	g++ -Ddebug -o cligame main.cpp $(objects) $(cflags) -g
+	$(CXX) -Ddebug $(out) -g
 
-$(objects): $(headers)
+$(objects): $(headers) $(OBJ)
+	$(CXX) -c -o $@ $(@F:.o=.cpp)
+
+$(OBJ):
+	mkdir $(OBJ)
 
 test: cligame
 	./$(EXE)

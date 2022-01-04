@@ -1,4 +1,4 @@
 tags
 script
-*.o
+obj
 cligame
