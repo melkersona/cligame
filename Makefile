@@ -3,7 +3,7 @@ DEPDIR := $(OBJDIR)/.deps
 BINDIR := bin
 BIN = cligame
 CXX = g++
-CXXFLAGS = -lncurses
+CXXFLAGS = -lncurses -Wall -O2 -march=native
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 
 
