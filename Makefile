@@ -1,31 +1,48 @@
-sources = $(wildcard *.cpp)
-headers = $(wildcard *.h)
-objects = $(addprefix $(OBJ), $(sources:.cpp=.o))
-CXXFLAGS = -lncurses
+OBJDIR := obj
+DEPDIR := $(OBJDIR)/.deps
+BINDIR := bin
+BIN = cligame
 CXX = g++
-OBJ = obj/
-BIN = bin/
-EXE = cligame
-out = -o $(EXE) $(objects) $(CXXFLAGS)
+CXXFLAGS = -lncurses
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 
-cligame: $(objects) $(headers)
+
+SRCS = $(wildcard *.cpp)
+headers = $(wildcard *.h)
+objects = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
+
+binary = $(BINDIR)/$(BIN)
+COMPILE.c = $(CC) $(DEPFLAGS) $(CFLAGS) $(CXXFLAGS) $(TARGET_ARCH) -c
+
+out = -o $(binary) $(objects) $(CXXFLAGS)
+
+$(binary): $(objects) | $(BINDIR)
 	$(CXX) $(out)
 
-debug: $(objects)
-	$(CXX) -Ddebug $(out) -g
+$(objects): | $(OBJDIR)
 
-$(objects): $(headers) $(OBJ)
-	$(CXX) -c -o $@ $(@F:.o=.cpp)
+.PHONY: clean tags test
+test: $(binary)
+	./$(binary)
 
-$(OBJ):
-	mkdir $(OBJ)
-
-test: cligame
-	./$(EXE)
-
-.PHONY: clean tags
 clean:
-	-rm $(objects) $(EXE)
+	-rm $(objects) $(binary)
 
-tags:
-	ctags -R --exclude=.git
+tags: .tags
+
+.tags:
+	ctags -Rf .tags --exclude=.git
+
+$(OBJDIR)/%.o : %.cpp
+$(OBJDIR)/%.o : %.cpp $(DEPDIR)/%.d | $(DEPDIR)
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+$(OBJDIR): ; @mkdir -p $@
+$(BINDIR): ; @mkdir -p $@
+$(DEPDIR): ; @mkdir -p $@
+
+DEPFILES := $(SRCS:%.cpp=$(DEPDIR)/%.d)
+$(DEPFILES):
+
+include $(wildcard $(DEPFILES))
+

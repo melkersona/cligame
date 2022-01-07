@@ -14,7 +14,6 @@ namespace game {
 
 		if (scriptfile.is_open()) {
 			while (getline(scriptfile,line)) {
-				foo.contents[x] = line;
 				x++;
 			}
 			scriptfile.close();

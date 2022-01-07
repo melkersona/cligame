@@ -35,8 +35,8 @@ namespace game {
 			if (active.needInput) {
 				game::getInput(active);
 			}
-//			game::drawFrameBuffer(active);
 			game::updateGameState();
+			game::drawFrameBuffer(active);
 			game::draw(active);
 			refresh();
 		}
@@ -45,10 +45,9 @@ namespace game {
 	
 	void init(void) {
 		active.running 	 = true;
-		active.needInput = false;
+		active.needInput = true;
 		active.cycles 	 = 0;
 		active.thisInput = '0';
-		script_t bar = game::readScript("script");
 		initscr();
 		cbreak();
 		keypad(stdscr, TRUE);
