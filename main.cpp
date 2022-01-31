@@ -71,15 +71,17 @@ namespace game {
 		return 0;
 	}
 }
-	int main(int argc, char* argv[]) {
-		if (argc==1) {
-			try {
-				return game::run();
-			} catch (const std::exception& e) {
-				PRINT("Oepsie Woeupsie! Bad things happened uwu.");
-			}
-		} else {
-			PRINT("You gave me arguments? You dumb motherfucker! What am I supposed to do with that? I'm going to exit now, just to spite you.");
+
+int main(int argc, char* argv[]) {
+	if (argc==1) {
+		try {
+			return game::run();
+		} catch (const std::exception& e) {
+			PRINT("Oepsie Woeupsie! Bad things happened uwu.");
 		}
+	} else {
+		PRINT("You gave me arguments? You dumb motherfucker! What am I supposed to do with that? I'm going to exit now, just to spite you.");
 		return 1;
 	}
+	return 0;	
+}
