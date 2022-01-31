@@ -25,6 +25,8 @@ namespace game {
 				break;
 		}
 
+		active.cycles++;
+
 		getmaxyx(stdscr, active.termHeight, active.termWidth);
 		
 		return void();
@@ -37,7 +39,7 @@ namespace game {
 			}
 			game::updateGameState();
 			game::drawFrameBuffer(active);
-			game::draw(active);
+			game::print(std::to_string(active.cycles));
 			refresh();
 		}
 		return void();
@@ -63,9 +65,9 @@ namespace game {
 	}
 
 	int run(void) {
-//		init();
-//		mainLoop();
-//		cleanup();
+		init();
+		mainLoop();
+		cleanup();
 		return 0;
 	}
 }

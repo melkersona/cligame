@@ -5,5 +5,6 @@
 namespace game {
 	void drawFrameBuffer(state_t &active);
 	void draw(state_t &active);
+	void print(std::string output);
 }
 #endif

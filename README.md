@@ -1,3 +1,4 @@
+# cligame
 In theory, my goal is to create a game engine that abstracts so heavily an English major can print a whole game.
 I/O will be abstracted to the point you can draw basic curses style graphics, all the way up to 3D scenes.
 Content will be served in the form of human readable scripts formatted like whatever kind of standard might exist for a screenplay, serving dialog, actor/fx/camera cues, and mechanical data only if necessary.
